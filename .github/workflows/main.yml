@@ -5,13 +5,17 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout project
+        uses: actions/checkout@v4
 
-      - name: Install Ren'Py
+      - name: Download Ren'Py
         run: |
-          curl -L https://renpy.org -o renpy.tar.bz2
-          tar -xjf renpy.tar.bz2
+          # Мы скачиваем актуальную версию 8.2.1. Если у вас 7-я версия, замените ссылку.
+          curl -L https://renpy.org -o renpy.zip
+          unzip -q renpy.zip
+          mv renpy-8.2.1-sdk renpy-sdk
 
       - name: Build iOS App
         run: |
-          ./renpy-8.1.1-sdk/renpy.sh . ios deploy . --signing-group "NONE"
+          # Эта команда запустит сборку из корня вашего репозитория
+          ./renpy-sdk/renpy.sh . ios deploy . --signing-group "NONE"
