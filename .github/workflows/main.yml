@@ -8,14 +8,9 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
-      - name: Download Ren'Py
-        run: |
-          # Мы скачиваем актуальную версию 8.2.1. Если у вас 7-я версия, замените ссылку.
-          curl -L https://renpy.org -o renpy.zip
-          unzip -q renpy.zip
-          mv renpy-8.2.1-sdk renpy-sdk
-
-      - name: Build iOS App
-        run: |
-          # Эта команда запустит сборку из корня вашего репозитория
-          ./renpy-sdk/renpy.sh . ios deploy . --signing-group "NONE"
+      - name: Build Game
+        uses: Ayane-Satomi/renpy-build-action@v1.5.0
+        with:
+          sdk-version: '8.5.0' # Укажите здесь свою версию Ren'Py
+          project-path: '.'
+          ios: true
