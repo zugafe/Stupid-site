@@ -8,9 +8,10 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
-      - name: Build Game
-        uses: Ayane-Satomi/renpy-build-action@v1.5.0
+      - name: Setup Ren'Py Build Action
+        uses: mal some/renpy-build-action@v2
         with:
-          sdk-version: '8.5.0' # Укажите здесь свою версию Ren'Py
+          sdk-version: '8.2.1' # Убедитесь, что эта версия совпадает с вашей
           project-path: '.'
+          # Собираем именно для iOS
           ios: true
